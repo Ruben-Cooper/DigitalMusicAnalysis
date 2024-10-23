@@ -33,13 +33,13 @@ namespace DigitalMusicAnalysis
 
         public MainWindow()
         {
+            Stopwatch stopwatch = new Stopwatch();
             InitializeComponent();
             filename = openFile("Select Audio (wav) file");
             string xmlfile = openFile("Select Score (xml) file");
+            stopwatch.Start();
             Thread check = new Thread(new ThreadStart(updateSlider));
             loadWave(filename);
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
             freqDomain(); // Short Time Fourier Transform - analyses the data
             sheetmusic = readXML(xmlfile);
             onsetDetection(); // Determinesn when one note starts and the next one begins - based on the STFT
